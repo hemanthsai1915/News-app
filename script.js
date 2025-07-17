@@ -51,10 +51,10 @@ let fetchData = async (search) => {
   }
 };
 
-input.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    const value = input.value.trim();
-    if (value) fetchData(value);
+input.addEventListener("input", () => {
+  const value = input.value.trim();
+  if (value.length > 1) {
+    fetchData(value);
   }
 });
 

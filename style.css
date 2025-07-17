@@ -1,0 +1,292 @@
+/* General body styles */
+body {
+  margin: 0;
+  padding-top: 95px;
+ background: linear-gradient(135deg, #eef2f3, #cfd9df);
+  font-family: 'Segoe UI', sans-serif;
+  color: #1a1a1a;
+}
+
+/* Content wrapper */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Navbar */
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 1100px;
+  z-index: 1000;
+  height: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364); /* dark blue gradient */
+  padding: 0 24px;
+  border-radius: 14px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Navbar title */
+.nav-container h3 {
+  font-size: 22px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* Search input */
+#inp {
+  padding: 10px 16px;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #f1f5f9;
+  width: 240px;
+  transition: box-shadow 0.3s ease, background-color 0.3s;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+#inp:focus {
+  outline: none;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(100, 149, 237, 0.4); /* cornflower blue glow */
+}
+
+#inp::placeholder {
+  color: #6b7280;
+}
+
+/* News card container */
+#news-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px 0;
+}
+
+/* News cards */
+.card {
+  background: linear-gradient(135deg, #f8fafc, #e2eafc); /* subtle gradient */
+  border-radius: 12px;
+  width: 300px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #d1d5db;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 12px;
+}
+
+.card h3 {
+  font-size: 18px;
+  color: #1e293b;
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.card a {
+  margin-top: auto;
+  text-decoration: none;
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+.card a:hover {
+  color: #1d4ed8;
+}
+.theme-toggle {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  
+}
+
+.theme-toggle button {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #2563eb;
+  color: white;
+  cursor: pointer;
+}
+
+.theme-toggle button:hover {
+  background-color: #1d4ed8;
+}
+.trend-button {
+  margin: 6px;
+  padding: 8px 14px;
+  background-color: var(--trend-bg);
+  color: var(--trend-text);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.trend-button:hover {
+  background-color: var(--trend-bg-hover);
+}
+:root {
+  --trend-bg: #2563eb;
+  --trend-bg-hover: #1d4ed8;
+  --trend-text: #ffffff;
+}
+
+body.dark-mode {
+  background: linear-gradient(to right, #1f2937, #0f172a);
+  color: #f1f5f9;
+   --trend-bg: #374151;
+  --trend-bg-hover: #4b5563;
+  --trend-text: #f1f5f9;
+
+}
+
+body.dark-mode .nav-container {
+  background: linear-gradient(to right, #0f172a, #1e293b);
+}
+
+body.dark-mode .card {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid #475569;
+}
+
+body.dark-mode .card h3,
+body.dark-mode .card p,
+body.dark-mode .card a {
+  color: #f1f5f9;
+}
+
+body.dark-mode #inp {
+  background-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode #inp::placeholder {
+  color: #94a3b8;
+}
+
+body.sunny-mode {
+  background: linear-gradient(to right, #fffde7, #ffecb3);
+  color: #1e293b;
+  --trend-bg: #fbbf24;
+  --trend-bg-hover: #f59e0b;
+  --trend-text: #78350f;
+
+}
+
+body.sunny-mode .nav-container {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+}
+
+body.sunny-mode .card {
+  background: linear-gradient(135deg, #fff8dc, #ffeaa7);
+  border: 1px solid #fbbf24;
+}
+
+body.sunny-mode .card h3,
+body.sunny-mode .card p,
+body.sunny-mode .card a {
+  color: #78350f;
+}
+
+body.sunny-mode #inp {
+  background-color: #fef9c3;
+  color: #78350f;
+}
+
+body.sunny-mode #inp::placeholder {
+  color: #a16207;
+}
+
+body.forest-mode {
+  background: linear-gradient(to right, #dcedc8, #a5d6a7);
+  color: #263238;
+  --trend-bg: #4caf50;
+  --trend-bg-hover: #2e7d32;
+  --trend-text: #fdfffe;
+
+}
+
+body.forest-mode .nav-container {
+  background: linear-gradient(to right, #558b2f, #33691e);
+}
+
+body.forest-mode .card {
+  background: linear-gradient(135deg, #f1f8e9, #d0f0c0);
+  border: 1px solid #81c784;
+}
+
+body.forest-mode .card h3,
+body.forest-mode .card p,
+body.forest-mode .card a {
+  color: #2e7d32;
+}
+
+body.forest-mode #inp {
+  background-color: #e6ee9c;
+  color: #1b5e20;
+}
+
+body.forest-mode #inp::placeholder {
+  color: #33691e;
+}
+
+
+/* trending topics css */
+#trending-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+/* Hide Google logo */
+.goog-logo-link {
+  display: none !important;
+}
+
+/* Hide "Powered by Google" text */
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Optional: remove background or border if it appears */
+.goog-te-gadget {
+  background: none !important;
+  border: none !important;
+  font-size: 0 !important;  /* Optional: hide default text */
+}
+
+
+
+

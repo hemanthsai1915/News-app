@@ -1,22 +1,31 @@
-// let api_key = "886a51ca6e744102958383a81efc4e28"; // using proxy api using node and render for github deploy
-let url = `https://news-app-proxy.onrender.com/news`;
+let api_key = "8de7c1f33483425e8361f9304f463ea9"; //this is 1st reuse api key first one expired// using proxy api using node and render for github deploy
+// let url = `https://news-app-proxy.onrender.com/news`;
+let url=`https://news-app-proxy-8rla.onrender.com`
+// let url = `https://newsapi.org/v2/everything`;
 
-let input = document.getElementById("inp");
+let search_btn = document.getElementById("search-btn");
 let container = document.getElementById("news-container");
 
 let fetchData = async (search) => {
   try {
-    let response = await fetch(`${url}?q=${search}&sortBy=popularity`);
+    let response = await fetch(
+      // `${url}?q=${search}&sortBy=popularity&apikey=${api_key}`
+      `${url}?q=${search}&sortBy=popularity`
+    );
     let jsonData = await response.json();
     let articles = jsonData.articles;
-
     container.innerHTML = ""; // Clear old results
-
-    if (!articles.length) {
-      container.innerHTML = "<p style='color:red;'>No articles found.</p>";
+    if (!articles || articles.length === 0) {
+      container.innerHTML = `
+        <div style="text-align: center; padding: 30px;">
+          <p style="font-size: 16px; color: #ef4444;">
+            😕 No articles found for "<strong>${search}</strong>". Try another topic.
+          </p>
+        </div>
+      `;
       return;
     }
-
+    //
     articles.forEach((article) => {
       const card = document.createElement("div");
 
@@ -47,20 +56,53 @@ let fetchData = async (search) => {
     });
   } catch (error) {
     console.log("Error:", error);
-    container.innerHTML = "<p style='color:red;'>Error fetching news.</p>";
+    // container.innerHTML = "<p style='color:red;'>Error fetching news.</p>";
+    container.innerHTML = `
+      <div style="text-align: center; padding: 30px;">
+        <h1 style="font-size: 16px; font-weight:bold;color: #ef4444;">
+          🚫 Error fetching news. Please check your internet or try again.
+        </h1>
+      </div>
+    `;
   }
 };
 
-input.addEventListener("input", () => {
+function showLoading() {
+  container.innerHTML = `
+    <div style="text-align: center; padding: 20px;">
+      <div class="loader"></div>
+      <p>Fetching news...</p>
+    </div>
+  `;
+}
+
+search_btn.addEventListener("click", () => {
   const value = input.value.trim();
+
   if (value.length > 1) {
+    showLoading();
     fetchData(value);
+  }
+  //   else if(fetchData.articles.length===0){
+  // container.innerHTML = "<h3 style='text-align:center;'>🔍 No Data Found.</h3>";
+  //   }
+  else {
+    container.innerHTML =
+      "<p style='text-align:center;'>🔍 Type to search news or explore trending topics.</p>";
+    // container.innerHTML = "<h3 style='text-align:center;'>🔍 No Data Found.</h3>";
+    // Optionally reload default
+    fetchData("India");
   }
 });
 
 async function fetchTrendingIndia() {
   try {
-    const response = await fetch(`https://news-app-proxy.onrender.com/news`);
+    let pop = "popularity";
+    let q = "India";
+    const response = await fetch(
+      // `${url}?q=${q}&sortBy=${pop}&apikey=${api_key}`
+      `${url}?q=${q}&sortBy=${pop}`
+    );
     const jsonData = await response.json();
     const articles = jsonData.articles;
 
@@ -149,18 +191,50 @@ fetchTrendingIndia();
 
 // fetchTrending();
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   const themeSelector = document.getElementById("themeSelector");
+
+//   themeSelector.addEventListener("change", () => {
+//     document.body.classList.remove("dark-mode", "sunny-mode", "forest-mode");
+
+//     const selected = themeSelector.value;
+//     if (selected !== "blue") {
+//       document.body.classList.add(`${selected}-mode`);
+//     }
+//   });
+
+//   themeSelector.value = "blue"; // Default theme
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
-  const themeSelector = document.getElementById("themeSelector");
+  // Find all theme dots
+  const dots = document.querySelectorAll(".dot");
 
-  themeSelector.addEventListener("change", () => {
-    document.body.classList.remove("dark-mode", "sunny-mode", "forest-mode");
+  // Set blue theme as default
+  document.querySelector('[data-theme="blue"]')?.classList.add("active-dot");
 
-    const selected = themeSelector.value;
-    if (selected !== "blue") {
-      document.body.classList.add(`${selected}-mode`);
-    }
+  // When a dot is clicked
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const theme = dot.getAttribute("data-theme");
+
+      // Remove previous theme classes
+      document.body.classList.remove("dark-mode", "sunny-mode", "forest-mode");
+
+      // If not blue, add the theme class
+      if (theme !== "blue") {
+        document.body.classList.add(`${theme}-mode`);
+      }
+
+      // Update active dot styling
+      dots.forEach((d) => d.classList.remove("active-dot"));
+      dot.classList.add("active-dot");
+    });
   });
-
-  themeSelector.value = "blue"; // Default theme
 });
 // supress google translate pop up
+
+window.addEventListener("DOMContentLoaded", () => {
+  showLoading();
+  fetchData("India"); // or use a neutral keyword like "top", "news", or "latest"
+});

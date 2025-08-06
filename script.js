@@ -1,6 +1,6 @@
 let api_key = "8de7c1f33483425e8361f9304f463ea9"; //this is 1st reuse api key first one expired// using proxy api using node and render for github deploy
 // let url = `https://news-app-proxy.onrender.com/news`;
-let url=`https://news-app-proxy-8rla.onrender.com`
+let url=`https://news-app-proxy-8rla.onrender.com/news`
 // let url = `https://newsapi.org/v2/everything`;
 
 let search_btn = document.getElementById("search-btn");
